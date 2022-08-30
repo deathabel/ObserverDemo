@@ -91,3 +91,5 @@ repository.stockChanged$.subscribe({
       command.value + '<br>';
   },
 });
+
+
