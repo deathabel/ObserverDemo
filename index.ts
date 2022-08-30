@@ -1,46 +1,7 @@
-/** Observer interface */
-interface Observer {
-  /** 實作nofity function，提供Observable呼叫 */
-  notify(message: any): void;
-}
-/** Observable interface */
-class Observable {
-  private observers: Observer[] = [];
-  /**  通知所有的觀察者，並提供異動的資料 */
-  notifyObservers(message: any): void {
-    for (var observer of this.observers)
-      new Promise((resolve, reject) => {
-        try {
-          resolve(observer.notify(message));
-        } catch (ex) {
-          reject(ex);
-        }
-      });
-  }
-  /** 提供Observer訂閱 */
-  subscribe(observer: Observer): Subscription {
-    return new Subscription(this, this.observers.push(observer) - 1);
-  }
-  /** 移除Observer訂閱 */
-  removeObserver(index: number) {
-    this.observers.splice(index, 1);
-  }
-}
-/** Subscription interface */
-class Subscription {
-  constructor(private observable: Observable, private index: number) {
-    this.observable = observable;
-    this.index = index;
-  }
-  /** 提供Observer退訂 */
-  unsubscribe(): void {
-    this.observable.removeObserver(this.index);
-  }
-}
+let firstRequest = true; 
 
 class Respository {
   private stock: number = 0;
-  stockChanged$ = new Observable();
 
   getStock(): number {
     return this.stock;
@@ -51,7 +12,6 @@ class Respository {
     value: number;
   }): void {
     this.stock = command.value;
-    this.stockChanged$.notifyObservers(command);
   }
 }
 const repository = new Respository();
@@ -70,24 +30,28 @@ document.querySelectorAll('input[type="button"]').forEach((node) => {
     repository.changeStock({ type, value });
   });
 });
-// input observer
-repository.stockChanged$.subscribe({
-  notify: (command) => {
-    if (command.type === 'input') return;
-    (document.getElementById('inputElement') as HTMLInputElement).value =
-      command.value;
-  },
-});
-// result observer
-repository.stockChanged$.subscribe({
-  notify: (command) => {
-    document.getElementById('result').innerHTML = command.value;
-  },
-});
-// log observer
-repository.stockChanged$.subscribe({
-  notify: (command) => {
-    document.querySelector(`[obs-type='${command.type}']`).innerHTML +=
-      command.value + '<br>';
-  },
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ignore
+if (firstRequest){
+  document.querySelectorAll('.show-2').forEach((node) => {
+    node.setAttribute('style', 'display: none');
+  });
+} else {
+  document.querySelectorAll('.show-1').forEach((node) => {
+    node.setAttribute('style', 'display: none');
+  });
+}

@@ -1,36 +1,52 @@
 <style>
   .log {
-      display: flex;
+    display: flex;
   }
   .log div {
-   flex-basis: 33%;
+    flex-basis: 33%;
   }
   .log div label {
-     font-weight: bold;
+    font-weight: bold;
   }
 </style>
 
 <div>
-   <div class='control'>
-      <input type='number' id='inputElement'>
-      <input type='button' value='+'>
-      <input type='button' value='-'>
-   </div>
-   <div style='margin: 1em 0;'>
-      result: <label id='result'></label>
-   </div>
-   <div class='log'>
-      <div>
-         <label>Log input</label>
-         <div obs-type='input'></div>
-      </div>
-      <div>
-         <label>Log plus</label>
-         <div obs-type='plus'></div>
-      </div>
-      <div>
-         <label>Log reduce</label>
-         <div obs-type='reduce'></div>
-      </div>
-   </div>
+  <pre class="show-1">
+新需求: 
+   請協助將使用者輸入的資料，顯示在(結果:)欄裡，
+   並將每次的資料記錄在Log Input裡
+   </pre
+  >
+  <pre class="show-2">
+新需求: 
+   使用者希望新增"加減"的功能，並分別記錄Log
+   </pre
+  >
+  <pre>
+Tips: 
+   use document.querySelector("[attribute='']") 
+   or document.getElementById('#id') to get element
+   </pre
+  >
+
+  <div class="control">
+    <input type="number" id="inputElement" />
+    <input type="button" value="+" class="show-2" />
+    <input type="button" value="-" class="show-2" />
+  </div>
+  <div style="margin: 1em 0">結果: <label id="result"></label></div>
+  <div class="log">
+    <div>
+      <label>Log input</label>
+      <div obs-type="input"></div>
+    </div>
+    <div class="show-2">
+      <label>Log plus</label>
+      <div obs-type="plus"></div>
+    </div>
+    <div class="show-2">
+      <label>Log reduce</label>
+      <div obs-type="reduce"></div>
+    </div>
+  </div>
 </div>
