@@ -40,6 +40,7 @@ class Subscription {
 
 class Respository {
   private stock: number = 0;
+  // stock observable
   stockChanged$ = new Observable();
 
   getStock(): number {
@@ -51,6 +52,7 @@ class Respository {
     value: number;
   }): void {
     this.stock = command.value;
+    // notify observers
     this.stockChanged$.notifyObservers(command);
   }
 }
@@ -91,5 +93,3 @@ repository.stockChanged$.subscribe({
       command.value + '<br>';
   },
 });
-
-
